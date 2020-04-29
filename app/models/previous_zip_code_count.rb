@@ -1,0 +1,2 @@
+class PreviousZipCodeCount < ApplicationRecord
+end
