@@ -5,7 +5,6 @@ class GenerateAlertListJob < ApplicationJob
 
   def perform(*args)
     GenerateAlertListJob.set(wait: 15.seconds).perform_later
-
     on_alert = []
     new_counts = Patient.group(:zip_code).count
     new_counts.each do |zip_code, count|

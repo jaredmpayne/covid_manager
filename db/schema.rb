@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(version: 2020_04_28_205711) do
     t.string "helipad"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["total_beds"], name: "index_hospitals_on_total_beds"
+    t.index ["trauma"], name: "index_hospitals_on_trauma"
+    t.index ["zip_code"], name: "index_hospitals_on_zip_code"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -44,6 +47,8 @@ ActiveRecord::Schema.define(version: 2020_04_28_205711) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["hospital_id"], name: "index_patients_on_hospital_id"
+    t.index ["mrn"], name: "index_patients_on_mrn"
+    t.index ["zip_code"], name: "index_patients_on_zip_code"
   end
 
   create_table "zip_distances", force: :cascade do |t|
@@ -52,6 +57,9 @@ ActiveRecord::Schema.define(version: 2020_04_28_205711) do
     t.float "distance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["distance"], name: "index_zip_distances_on_distance"
+    t.index ["zip_from"], name: "index_zip_distances_on_zip_from"
+    t.index ["zip_to"], name: "index_zip_distances_on_zip_to"
   end
 
 end
