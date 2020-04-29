@@ -1,6 +1,6 @@
 class CreateAllTables < ActiveRecord::Migration[6.0]
   def change
-    create_table :hospitals, id: :string do |t|
+    create_table :hospitals do |t|
       t.string :name
       t.string :address
       t.string :city
@@ -26,22 +26,13 @@ class CreateAllTables < ActiveRecord::Migration[6.0]
       t.string :mrn
       t.string :zip_code
       t.string :patient_status_code
-      t.references :hospital
+      t.references :hospital, default: -1
       t.timestamps
     end
     create_table :zip_distances do |t|
       t.string :zip_from
       t.string :zip_to
-      t.string :distance
-      t.timestamps
-    end
-    create_table :previous_zip_code_counts do |t|
-      t.string :zip_code
-      t.integer :count
-      t.timestamps
-    end
-    create_table :on_alert_zip_codes do |t|
-      t.string :zip_code
+      t.float :distance
       t.timestamps
     end
   end

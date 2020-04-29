@@ -1,2 +1,0 @@
-class OnAlertZipCode < ApplicationRecord
-end

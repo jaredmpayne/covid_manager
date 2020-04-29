@@ -1,8 +1,10 @@
 <h1>CS 505 Final Project</h1>
-
+<h3>Written by Jared Payne</h3>
 <div id="controls">
   <p>
     <button id="on-off-button">Start sending messages</button>
+    <input type="checkbox" id="log-payload-contents" checked></input>
+    <label for="log-payload-contents">Log payload contents</label>
   </p>
   <p>
     Send a message every
@@ -13,4 +15,19 @@
   </p>
 </div>
 <div id="log">
+  <p>
+    This is the publisher interface for the project. It is implemented in
+    Javascript (located at app/javascript/channels/patient_channel.js in the
+    project directory) and is a reverse engineering of the provided publisher
+    template that was written in Python. Everything, including names, ZIP codes,
+    and MRN UUIDs are generated in a functionally equivalent manner.
+  </p>
+  <p>
+    This project instead streams in patients via WebSockets. Patients are sent
+    over the PatientChannel, and then processed by the PatientChannel class
+    (located at app/channels/patient_channel.rb), which inserts them into the
+    database and then queues a job that attempts to route them to the nearest
+    available qualified hospital according to their status codes. The result of
+    this job can then be retrieved at the API access point /api/getassignment.
+  </p>
 </div>

@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_04_28_205711) do
 
-  create_table "hospitals", id: :string, force: :cascade do |t|
+  create_table "hospitals", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "city"
@@ -34,35 +34,22 @@ ActiveRecord::Schema.define(version: 2020_04_28_205711) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "on_alert_zip_codes", force: :cascade do |t|
-    t.string "zip_code"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "patients", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "mrn"
     t.string "zip_code"
     t.string "patient_status_code"
-    t.integer "hospital_id"
+    t.integer "hospital_id", default: -1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["hospital_id"], name: "index_patients_on_hospital_id"
   end
 
-  create_table "previous_zip_code_counts", force: :cascade do |t|
-    t.string "zip_code"
-    t.integer "count"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "zip_distances", force: :cascade do |t|
     t.string "zip_from"
     t.string "zip_to"
-    t.string "distance"
+    t.float "distance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

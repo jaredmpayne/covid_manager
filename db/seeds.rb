@@ -12,14 +12,14 @@ ZipDistance.insert_all(CSV.foreach('db/kyzipdistance.csv').drop(1).map { |row|
   {
     'zip_from': row[0],
     'zip_to': row[1],
-    'distance': row[2],
+    'distance': row[2].to_f,
     'created_at': Time.now,
     'updated_at': Time.now
   }
 })
 Hospital.insert_all(CSV.foreach('db/hospitals.csv').drop(1).map { |row|
   {
-    'id': row[0],
+    'id': row[0].to_i,
     'name': row[1],
     'address': row[2],
     'city': row[3],
@@ -43,5 +43,5 @@ Hospital.insert_all(CSV.foreach('db/hospitals.csv').drop(1).map { |row|
 })
 
 # These assignments are kept in the hospital database for simplicity.
-Hospital.create(id: '0', name: 'Home assignment')
-Hospital.create(id: '-1', name: 'No assignment')
+Hospital.create(id: 0, name: 'Home assignment')
+Hospital.create(id: -1, name: 'No assignment')

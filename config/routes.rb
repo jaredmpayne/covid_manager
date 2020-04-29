@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/api/testcount', to: 'api#test_count'
   get '/api/getpatient/:mrn', to: 'api#get_patient'
   get '/api/gethospital/:id', to: 'api#get_hospital'
+  get '/api/getassignment/:mrn', to: 'api#get_assignment'
   # For details on the DSL available within this file, see
   # https://guides.rubyonrails.org/routing.html
 end

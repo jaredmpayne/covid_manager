@@ -12,5 +12,7 @@ class PatientChannel < ApplicationCable::Channel
     Patient.insert_all(patients.map { |patient|
       patient.merge({ created_at: Time.now, updated_at: Time.now })
     })
+    mrns = patients.map { |patient| patient['mrn'] }
+    ProcessPatientsJob.perform_later(mrns)
   end
 end

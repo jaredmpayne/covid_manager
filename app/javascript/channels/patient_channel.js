@@ -2,6 +2,7 @@ import { v1 as uuidv1 } from "uuid"
 import consumer from "./consumer"
 
 var faker = require("faker");
+var random = require("random");
 
 var statusCodes = ["0", "1", "2", "3", "4", "5", "6"];
 
@@ -105,7 +106,7 @@ var zipCodes = ["42201", "42202", "41201", "42120", "42602", "41001", "41601",
 "41397"];
 
 function postLog(message) {
-    $("#log").prepend(`<p>${Date()}: ${message}</p>`);
+    $("#log").prepend(`<p><strong>${Date()}</strong>: ${message}</p>`);
 }
 
 function makePatient() {
@@ -113,8 +114,8 @@ function makePatient() {
         "first_name": faker.name.firstName(),
         "last_name": faker.name.lastName(),
         "mrn": uuidv1(),
-        "zip_code": zipCodes[Math.floor(Math.random() * zipCodes.length)],
-        "patient_status_code": statusCodes[Math.floor(Math.random() * statusCodes.length)]
+        "zip_code": zipCodes[random.int(0, zipCodes.length - 1)],
+        "patient_status_code": statusCodes[random.int(0, statusCodes.length - 1)]
     };
 }
 
@@ -147,10 +148,13 @@ $(document).on("turbolinks:load", () => {
         if ($("#on-off-button").text() === "Stop sending messages") {
             var min = Number($("#min-patients").val());
             var max = Number($("#max-patients").val());
-            var n = Math.floor(Math.random() * max) + min;
+            var n = random.int(min, max);
             var payload = getPayload(n);
-            consumer.patientChannel.insertPatients(getPayload(n));
-            postLog(`Sent payload of ${n} patients: ${JSON.stringify(payload)}`);
+            consumer.patientChannel.insertPatients(payload);
+            postLog(`Sent payload of ${n} patients.`);
+            if ($("#log-payload-contents").prop("checked")) {
+                postLog(JSON.stringify(payload));
+            }
         }
     }, Number($("#rate").val()) * 1000);
 });

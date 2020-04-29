@@ -8,6 +8,7 @@
     "@rails/webpacker": "4.2.2",
     "faker": "^4.1.0",
     "jquery": "^3.5.0",
+    "random": "^2.2.0",
     "turbolinks": "^5.2.0",
     "uuid": "^7.0.3"
   },
